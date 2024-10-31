@@ -1,0 +1,30 @@
+name: Earn GitHub Badges
+
+on:
+  workflow_dispatch:  # Manually trigger the workflow
+  schedule:           # Schedule it to run periodically (adjust as needed)
+    - cron: '0 12 * * 1'  # Runs every Monday at 12:00 PM UTC
+
+jobs:
+  earn_badges_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub requests
+
+      - name: Run script to earn badges
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub-provided token
+        run: |
+          python your_script_name.py  # Replace with the actual Python script file name
