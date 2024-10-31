@@ -61,7 +61,7 @@ def merge_pr_without_review(repo_name):
 # Automate actions to earn badges
 def earn_badges():
     # Pull Shark: Create PRs in popular repositories
-    create_pull_request("octocat/Hello-World")  # Replace with repositories that have stars
+    create_pull_request("learnwithums/test1")  # Replace with repositories that have stars
 
     # Pair Extraordinaire: Create co-authored commit
     create_coauthored_commit("ums91/King6")  # Replace with your repository
