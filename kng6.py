@@ -4,7 +4,7 @@ import time
 import os
 
 # GitHub Personal Access Token (PAT)
-GITHUB_TOKEN = os.getenv("king6")
+GITHUB_TOKEN = os.getenv("KING6")
 GITHUB_USERNAME = "ums91"
 
 # Authenticate with GitHub
@@ -32,8 +32,8 @@ def create_coauthored_commit(repo_name):
             "/achievement_commit.md",
             "Automated commit for Pair Extraordinaire achievement",
             "This is a co-authored commit to achieve the 'Pair Extraordinaire' badge.",
-            committer={"name": "Your Name", "email": "your_email@example.com"},
-            author={"name": "Co-author", "email": "coauthor@example.com"},  # Replace with a collaborator’s email
+            committer={"name": "ums91", "email": "omargoroo91@gmail.com"},
+            author={"name": "learnwithums", "email": "learnwithums@gmail.com"},  # Replace with a collaborator’s email
         )
         print("Co-authored commit created.")
     except Exception as e:
@@ -64,13 +64,13 @@ def earn_badges():
     create_pull_request("octocat/Hello-World")  # Replace with repositories that have stars
 
     # Pair Extraordinaire: Create co-authored commit
-    create_coauthored_commit("ums91/Wolfpack")  # Replace with your repository
+    create_coauthored_commit("ums91/King6")  # Replace with your repository
 
     # Public Sponsor: Requires manual action
     public_sponsor()
 
     # YOLO: Merge PR without review
-    merge_pr_without_review("ums91/Wolfpack")  # Replace with your repository
+    merge_pr_without_review("ums91/King6")  # Replace with your repository
 
 # Run the badge-earning actions
 earn_badges()
