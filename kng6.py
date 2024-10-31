@@ -64,13 +64,13 @@ def earn_badges():
     create_pull_request("learnwithums/test1")  # Replace with repositories that have stars
 
     # Pair Extraordinaire: Create co-authored commit
-    create_coauthored_commit("ums91/King6")  # Replace with your repository
+    create_coauthored_commit("learnwithums/test1")  # Replace with your repository
 
     # Public Sponsor: Requires manual action
     public_sponsor()
 
     # YOLO: Merge PR without review
-    merge_pr_without_review("ums91/King6")  # Replace with your repository
+    merge_pr_without_review("learnwithums/test1")  # Replace with your repository
 
 # Run the badge-earning actions
 earn_badges()
