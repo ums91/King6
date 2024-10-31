@@ -19,26 +19,34 @@ def create_coauthored_commit(repo_name):
             "Co-authored-by: learnwithums <learnwithums@gmail.com>"
         )
         content = "This is a co-authored commit to achieve the 'Pair Extraordinaire' badge."
-        
-        # Check if the file exists in the repository
+
+        # Get the default branch (typically 'main')
+        default_branch = repo.default_branch
+
+        # Check if the file exists on the default branch
         try:
-            # If file exists, get its SHA and update it
-            file = repo.get_contents(file_path)
+            file = repo.get_contents(file_path, ref=default_branch)
+            # If it exists, update the file using its SHA
             repo.update_file(
                 path=file_path,
                 message=commit_message,
                 content=content,
-                sha=file.sha,  # Required SHA for updating
+                sha=file.sha,
+                branch=default_branch
             )
             print("Co-authored commit updated the existing file.")
-        except Exception:
-            # If the file doesn't exist, create it
-            repo.create_file(
-                path=file_path,
-                message=commit_message,
-                content=content,
-            )
-            print("Co-authored commit created a new file.")
+        except Exception as e:
+            # If the file doesn't exist, create it on the default branch
+            if "404" in str(e):
+                repo.create_file(
+                    path=file_path,
+                    message=commit_message,
+                    content=content,
+                    branch=default_branch
+                )
+                print("Co-authored commit created a new file.")
+            else:
+                raise e
     
     except Exception as e:
         print(f"Failed to create co-authored commit: {e}")
