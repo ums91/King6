@@ -22,11 +22,14 @@ def create_coauthored_commit(repo_name):
 
         # Get the default branch (typically 'main')
         default_branch = repo.default_branch
+        print(f"Using default branch: {default_branch}")
 
         # Check if the file exists on the default branch
         try:
             file = repo.get_contents(file_path, ref=default_branch)
-            # If it exists, update the file using its SHA
+            print(f"File exists with SHA: {file.sha}")
+
+            # If the file exists, update it using its SHA
             repo.update_file(
                 path=file_path,
                 message=commit_message,
@@ -36,8 +39,9 @@ def create_coauthored_commit(repo_name):
             )
             print("Co-authored commit updated the existing file.")
         except Exception as e:
-            # If the file doesn't exist, create it on the default branch
             if "404" in str(e):
+                print("File does not exist. Creating a new file.")
+                # If the file doesn't exist, create it on the default branch
                 repo.create_file(
                     path=file_path,
                     message=commit_message,
@@ -46,6 +50,7 @@ def create_coauthored_commit(repo_name):
                 )
                 print("Co-authored commit created a new file.")
             else:
+                print(f"Error checking file existence: {e}")
                 raise e
     
     except Exception as e:
