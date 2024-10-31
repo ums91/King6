@@ -25,6 +25,6 @@ jobs:
 
       - name: Run script to earn badges
         env:
-          GITHUB_TOKEN: ${{ secrets.king6 }}  # Use the GitHub-provided token
+          GITHUB_TOKEN: ${{ secrets.KING6 }}  # Use the GitHub-provided token
         run: |
           python your_script_name.py  # Replace with the actual Python script file name
