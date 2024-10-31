@@ -1,9 +1,10 @@
 from github import Github
 import requests
 import time
+import os
 
 # GitHub Personal Access Token (PAT)
-GITHUB_TOKEN = "your_token_here"
+GITHUB_TOKEN = os.getenv("king6")
 GITHUB_USERNAME = "ums91"
 
 # Authenticate with GitHub
