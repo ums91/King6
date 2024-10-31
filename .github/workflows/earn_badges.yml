@@ -27,4 +27,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.KING6 }}  # Use the GitHub-provided token
         run: |
-          python your_script_name.py  # Replace with the actual Python script file name
+          python kng6.py  # Replace with the actual Python script file name
