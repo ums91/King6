@@ -32,6 +32,7 @@ def create_coauthored_commit_and_pr(repo_name):
 
         # Check if the file exists on the default branch
         try:
+            # Try to get the file content from the default branch
             file = repo.get_contents(file_path, ref=default_branch)
             print(f"File exists with SHA: {file.sha}")
 
@@ -40,7 +41,7 @@ def create_coauthored_commit_and_pr(repo_name):
                 path=file_path,
                 message=commit_message,
                 content=content,
-                sha=file.sha,  # Ensure this is correctly passed
+                sha=file.sha,  # Correctly use the file's SHA for updates
                 branch=new_branch
             )
             print("Co-authored commit updated the existing file.")
