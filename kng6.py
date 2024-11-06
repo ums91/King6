@@ -9,7 +9,7 @@ GITHUB_USERNAME = "ums91"
 g = Github(GITHUB_TOKEN)
 
 # Function to co-author a commit for the "Pair Extraordinaire" badge
-def create_coauthored_commit(repo_name):
+def create_coauthored_commit_and_pr(repo_name):
     try:
         repo = g.get_repo(repo_name)
         file_path = "achievement_commit.md"
@@ -24,6 +24,12 @@ def create_coauthored_commit(repo_name):
         default_branch = repo.default_branch
         print(f"Using default branch: {default_branch}")
 
+        # Create a new branch for the commit
+        new_branch = default_branch + "_pair_extraordinaire"
+        base = repo.get_branch(default_branch)
+        repo.create_git_ref(ref='refs/heads/' + new_branch, sha=base.commit.sha)
+        print(f"Created a new branch: {new_branch}")
+
         # Check if the file exists on the default branch
         try:
             file = repo.get_contents(file_path, ref=default_branch)
@@ -35,26 +41,37 @@ def create_coauthored_commit(repo_name):
                 message=commit_message,
                 content=content,
                 sha=file.sha,
-                branch=default_branch
+                branch=new_branch
             )
             print("Co-authored commit updated the existing file.")
         except Exception as e:
             if "404" in str(e):
                 print("File does not exist. Creating a new file.")
-                # If the file doesn't exist, create it on the default branch
+                # If the file doesn't exist, create it on the new branch
                 repo.create_file(
                     path=file_path,
                     message=commit_message,
                     content=content,
-                    branch=default_branch
+                    branch=new_branch
                 )
                 print("Co-authored commit created a new file.")
             else:
                 print(f"Error checking file existence: {e}")
                 raise e
-    
+
+        # Create a pull request
+        pr_title = "Add co-authored commit for Pair Extraordinaire"
+        pr_body = "This PR contains a co-authored commit to trigger the 'Pair Extraordinaire' achievement."
+        pr = repo.create_pull(
+            title=pr_title,
+            body=pr_body,
+            head=new_branch,
+            base=default_branch
+        )
+        print(f"Pull request created: {pr.title}")
+
     except Exception as e:
-        print(f"Failed to create co-authored commit: {e}")
+        print(f"Failed to create co-authored commit and PR: {e}")
 
 # Run the function to earn "Pair Extraordinaire"
-create_coauthored_commit("learnwithums/test1")
+create_coauthored_commit_and_pr("learnwithums/test1")
