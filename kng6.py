@@ -63,4 +63,15 @@ def create_coauthored_commit_and_pr(repo_name):
         pr_title = "Add co-authored commit for Pair Extraordinaire"
         pr_body = "This PR contains a co-authored commit to trigger the 'Pair Extraordinaire' achievement."
         pr = repo.create_pull(
-          
+            title=pr_title,
+            body=pr_body,
+            head=new_branch,
+            base=default_branch
+        )
+        print(f"Pull request created: {pr.title}")
+
+    except Exception as e:
+        print(f"Failed to create co-authored commit and PR: {e}")
+
+# Run the function to earn "Pair Extraordinaire"
+create_coauthored_commit_and_pr("ums91/KING6")
