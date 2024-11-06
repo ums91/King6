@@ -25,9 +25,9 @@ def create_coauthored_commit_and_pr(repo_name):
         print(f"Using default branch: {default_branch}")
 
         # Create a new branch for the commit
-        new_branch = default_branch + "_pair_extraordinaire"
+        new_branch = f"{default_branch}_pair_extraordinaire"
         base = repo.get_branch(default_branch)
-        repo.create_git_ref(ref='refs/heads/' + new_branch, sha=base.commit.sha)
+        repo.create_git_ref(ref=f'refs/heads/{new_branch}', sha=base.commit.sha)
         print(f"Created a new branch: {new_branch}")
 
         # Check if the file exists on the default branch
@@ -41,7 +41,7 @@ def create_coauthored_commit_and_pr(repo_name):
                 path=file_path,
                 message=commit_message,
                 content=content,
-                sha=file.sha,  # Correctly use the file's SHA for updates
+                sha=file.sha,  # Use the file's SHA for updates
                 branch=new_branch
             )
             print("Co-authored commit updated the existing file.")
