@@ -21,10 +21,10 @@ jobs:
 
       - name: Run Galaxy Brain Script
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.KING6 }}
           USERNAME: 'ums91'  # Replace with your GitHub username
-          REPO_OWNER: 'target-repo-owner'  # Replace with the repository owner
-          REPO_NAME: 'target-repo-name'    # Replace with the target repository name
+          REPO_OWNER: 'learnwithums'  # Replace with the repository owner
+          REPO_NAME: 'test1'    # Replace with the target repository name
         run: |
           python - <<EOF
           import requests
