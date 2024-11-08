@@ -2,10 +2,10 @@ import requests
 import time
 
 # Set your GitHub credentials and target repository details
-GITHUB_TOKEN = 'YOUR_GITHUB_TOKEN'  # Replace with your GitHub token
+GITHUB_TOKEN = os.getenv("KING6")  # Replace with your GitHub token
 USERNAME = 'ums91'  # Your GitHub username
-REPO_OWNER = 'target-repo-owner'  # Replace with the owner of the target public repo
-REPO_NAME = 'target-repo-name'  # Replace with the target public repo name
+REPO_OWNER = 'learnwithums'  # Replace with the owner of the target public repo
+REPO_NAME = 'test1'  # Replace with the target public repo name
 
 # Headers for authentication
 headers = {
