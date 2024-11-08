@@ -21,14 +21,21 @@ jobs:
 
       - name: Run Galaxy Brain Script
         env:
-          GITHUB_TOKEN: ${{ secrets.KING6 }}
-          USERNAME: 'ums91'  # Replace with your GitHub username
+          GITHUB_TOKEN: ${{ secrets.KING6 }}  # Correctly sets GITHUB_TOKEN from KING6
+          USERNAME: 'ums91'  # Your GitHub username
           REPO_OWNER: 'learnwithums'  # Replace with the repository owner
-          REPO_NAME: 'test1'    # Replace with the target repository name
+          REPO_NAME: 'test1'           # Replace with the target repository name
         run: |
           python - <<EOF
           import requests
           import time
+          import os
+
+          # Set your GitHub credentials and target repository details
+          GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")  # Now it fetches correctly
+          USERNAME = 'ums91'
+          REPO_OWNER = 'learnwithums'
+          REPO_NAME = 'test1'
 
           # Headers for authentication
           headers = {
